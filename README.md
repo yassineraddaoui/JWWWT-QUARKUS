@@ -1,63 +1,78 @@
-# code-with-quarkus
+# JWT Authentication with Quarkus
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project demonstrates a secure JWT-based authentication system built with Quarkus, featuring user registration and login functionality.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## Features
 
-## Running the application in dev mode
+- User registration and authentication
+- JWT token-based security
+- H2 database integration
+- OpenAPI documentation
+- Health checks and metrics
+- Docker support
 
-You can run your application in dev mode that enables live coding using:
+## Prerequisites
 
-```shell script
-./mvnw quarkus:dev
+- JDK 17 or later
+- Maven 3.8.1 or later
+- Docker (optional)
+
+## Getting Started
+
+### Running the application in dev mode
+
+```bash
+./mvnw compile quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+### Running with Docker Compose
 
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-./mvnw package
+```bash
+docker-compose up --build
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+## API Documentation
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+Once the application is running, you can access the OpenAPI documentation at:
+- Swagger UI: http://localhost:8080/q/swagger-ui
+- OpenAPI spec: http://localhost:8080/q/openapi
 
-If you want to build an _über-jar_, execute the following command:
+## Health and Metrics
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
+- Health check endpoint: http://localhost:8080/q/health
+- Metrics endpoint: http://localhost:8080/q/metrics
+
+## API Endpoints
+
+### Authentication
+
+- POST `/auth/signup` - Register a new user
+- POST `/auth/signin` - Authenticate and get JWT token
+
+### Protected Resources
+
+- GET `/api/protected` - Access protected resource (requires JWT token)
+
+## Testing
+
+Run the tests using:
+
+```bash
+./mvnw test
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+## Security
 
-## Creating a native executable
+The application uses:
+- JWT tokens for authentication
+- Password hashing for secure storage
+- Input validation
+- Role-based access control
 
-You can create a native executable using:
+## Contributing
 
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
-# test-jwt-quarkus
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
